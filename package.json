@@ -16,5 +16,7 @@
     "url": "https://github.com/0h4crying0utloud/webcheck/issues"
   },
   "homepage": "https://github.com/0h4crying0utloud/webcheck",
-  "dependencies": {}
+  "dependencies": {
+    "ejs": "^2.5.7"
+  }
 }

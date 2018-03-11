@@ -5,9 +5,10 @@
  * @param {Object} res Cloud Function response context.
  */
 
-// assumes POST
-// are these express based objects? (appear to be)
+var ejs = require('ejs');
+
 exports.webcheck = (req, res) => {
-    let name = req.body.name;  
-    res.status(200).send(`Hello ${name || 'World'}!`);
-  };  
+  let people = ['test1', 'test2', 'test3'];
+  let html = ejs.render('<%- include(\'views/layout\', people); %>', {people: people}, {filename: 'true'});
+  res.status(200).send(html);
+};  
