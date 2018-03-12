@@ -5,10 +5,23 @@
  * @param {Object} res Cloud Function response context.
  */
 
-var ejs = require('ejs');
+const ejs = require('ejs');
+const fetch = require('node-fetch'); 
 
 exports.webcheck = (req, res) => {
-  let people = ['test1', 'test2', 'test3'];
-  let html = ejs.render('<%- include(\'views/layout\', people); %>', {people: people}, {filename: 'true'});
+  let pages = ['http://cars.com', 'test2', 'test3'];
+  let html = ejs.render('<%- include(\'views/layout\', pages); %>', {pages: pages}, {filename: 'true'});
   res.status(200).send(html);
+};      
+
+exports.proxyPage = (req, res) => {
+  return fetch(decodeURI(req.query.url))
+  .then(fres => fres.text())
+  .then(html => res.status(200).send(html))
+  .catch(e => {
+    console.log(e);
+    res.status(500).send('sorry!');
+  })
 };  
+
+
